@@ -14,5 +14,29 @@ Variable CaPiTaL is
 ANSWER EXPLANATION
 
 PHP is case-sensitive with variable names.
-
 $capital is defined, but $CaPiTaL is not.
+
+2.Create a PHP program to display the division table using for-loop.
+1 2 3
+1 1 0.5 0.33
+2 2 1 0.66
+3 3 1.5 1
+
+Code:
+
+php
+Copy
+Edit
+<?php
+echo "<table border='1'>";
+for ($i = 1; $i <= 3; $i++) {
+    echo "<tr>";
+    for ($j = 1; $j <= 3; $j++) {
+        echo "<td>" . round($i / $j, 2) . "</td>";
+    }
+    echo "</tr>";
+}
+echo "</table>";
+?>
+
+
