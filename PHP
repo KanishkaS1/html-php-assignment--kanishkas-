@@ -39,4 +39,436 @@ for ($i = 1; $i <= 3; $i++) {
 echo "</table>";
 ?>
 
+4. Predict the output:
+
+$animal = "antelope";
+$animal_heads = 1;
+$animal_legs = 4;
+echo "The $animal has $animal_heads head(s).";
+echo "The $animal has $animal_legs leg(s).";
+
+Output:
+
+The antelope has 1 head(s).The antelope has 4 leg(s).
+
+5. You are building a website where users can calculate the total cost of their purchases.
+Write a PHP program that takes the price and quantity of three items from the user and
+calculates the subtotal, tax (10% of the subtotal),and the total cost (subtotal + tax).
+Display the results to the user.
+
+CODE
+<?php
+$price = 100;
+$quantity = 3;
+$subtotal = $price * $quantity;
+$tax = $subtotal * 0.10;
+$total = $subtotal + $tax;
+
+echo "Subtotal: ₹$subtotal<br>";
+echo "Tax (10%): ₹$tax<br>";
+echo "Total: ₹$total";
+?>
+
+6. Interpret the method to pass the information between pages in PHP with an example.
+1. GET Method
+Appends data in the URL (visible to users)
+Use when data is not sensitive
+
+Page 1 (form.html):
+<form action="welcome.php" method="get">
+  Name: <input type="text" name="name">
+  <input type="submit" value="Submit">
+</form>
+
+Page 2 (welcome.php):
+<?php
+$name = $_GET['name'];
+echo "Welcome, $name!";
+?>
+
+2. POST Method (Secure data transfer)
+Sends data in the HTTP body (not shown in URL).
+Suitable for sensitive information.
+
+Page 1 (form.html):
+<form action="welcome.php" method="post">
+  Name: <input type="text" name="name">
+  <input type="submit" value="Submit">
+</form>
+
+Page 2 (welcome.php):
+<?php
+$name = $_POST['name'];
+echo "Welcome, $name!";
+?>
+ 3. SESSION Method (Store data across multiple pages)
+Stores data on the server.
+
+Ideal for login sessions or shopping carts.
+
+Example:
+
+Page 1 (login.php):
+
+<?php
+session_start();
+$_SESSION['username'] = "Kanishka";
+header("Location: profile.php");
+?>
+
+Page 2 (profile.php):
+
+<?php
+session_start();
+echo "Welcome, " . $_SESSION['username'];
+?>
+
+Conclusion:
+Use GET for simple, non-sensitive data.
+Use POST for secure form handling.
+Use SESSION to store data across multiple pages securely.
+
+7. PHP Form to Take Name and Print Greeting or Error Message
+This PHP form will:
+
+Ask for the user's name.
+Print a greeting:
+Hello, [Name]! Welcome to Everyone!
+Have a nice day!!
+Show an error if the name field is blank.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Greeting Form</title>
+</head>
+<body>
+
+<form method="post" action="">
+    Enter your name: <input type="text" name="username">
+    <input type="submit" value="Submit">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = trim($_POST["username"]);
+
+    if (!empty($name)) {
+        echo "<h3>Hello, $name! Welcome to Everyone!</h3>";
+        echo "<p>Have a nice day!!</p>";
+    } else {
+        echo "<p style='color:red;'>Error: Name field cannot be empty.</p>";
+    }
+}
+?>
+
+</body>
+</html>
+
+Output:
+If name = “Kanishka”:
+
+css
+
+Hello, Kanishka! Welcome to Everyone!
+Have a nice day!!
+If name = (blank):
+
+javascript
+
+Error: Name field cannot be empty.
+
+8. A customer visits a shop to buy a soft drink; he has two options:
+Drink A cost is Rs.25 and the size of the bottle is 11.
+Drink B cost is Rs.23 and its size of the bottle is 9.
+Which drink should he choose to save money? Solve this problem using function deal ( ).
+
+Problem Breakdown:
+Drink A: ₹25 for 11 units → cost per unit = ₹25 / 11
+
+Drink B: ₹23 for 9 units → cost per unit = ₹23 / 9
+
+The drink with the lower cost per unit is the better deal.
+
+<?php
+function deal($costA, $sizeA, $costB, $sizeB) {
+    $unitCostA = $costA / $sizeA;
+    $unitCostB = $costB / $sizeB;
+
+    echo "Cost per unit of Drink A: ₹" . round($unitCostA, 2) . "<br>";
+    echo "Cost per unit of Drink B: ₹" . round($unitCostB, 2) . "<br>";
+
+    if ($unitCostA < $unitCostB) {
+        echo "<strong>Drink A is the better deal.</strong>";
+    } elseif ($unitCostB < $unitCostA) {
+        echo "<strong>Drink B is the better deal.</strong>";
+    } else {
+        echo "<strong>Both drinks offer the same value.</strong>";
+    }
+}
+
+// Call the function with given values
+deal(25, 11, 23, 9);
+?>
+
+Output:
+
+Cost per unit of Drink A: ₹2.27  
+Cost per unit of Drink B: ₹2.56  
+Drink A is the better deal.
+Drink A should be chosen, as it provides more quantity for the money (lower cost per unit).
+
+9.Predict the output of the following snippet:
+$this = “this”; $that = “that”; $the_other = 2.2000000000;
+print(“$this,$not_set,$that+$the_other”);
+
+Actual Output:
+If $this is removed or renamed (e.g., $this_), the output would be:
+
+$this_ = "this";
+$that = "that";
+$the_other = 2.2;
+print("$this_,$not_set,$that+$the_other")
+Output:
+
+this,,that+2.2
+$not_set is undefined → becomes an empty string
+
+$that+$the_other is not evaluated, just shown as string.
+
+Corrected Output (if $this is renamed):
+this,,that+2.2
+
+10. Develop a program to check student grades based on marks using a loop.
+
+This program:
+
+Takes marks of multiple students.
+Uses a loop to assign grades based on standard rules.
+Uses if-else conditions inside a loop.
+
+| Marks    | Grade |
+| -------- | ----- |
+| 90 – 100 | A+    |
+| 80 – 89  | A     |
+| 70 – 79  | B     |
+| 60 – 69  | C     |
+| 50 – 59  | D     |
+| Below 50 | Fail  |
+
+<?php
+// Sample list of student marks
+$student_marks = [95, 83, 72, 67, 58, 44, 88];
+
+echo "<h3>Student Grades:</h3>";
+
+foreach ($student_marks as $index => $mark) {
+    echo "Student " . ($index + 1) . " - Marks: $mark - Grade: ";
+
+    if ($mark >= 90 && $mark <= 100) {
+        echo "A+";
+    } elseif ($mark >= 80) {
+        echo "A";
+    } elseif ($mark >= 70) {
+        echo "B";
+    } elseif ($mark >= 60) {
+        echo "C";
+    } elseif ($mark >= 50) {
+        echo "D";
+    } else {
+        echo "Fail";
+    }
+
+    echo "<br>";
+}
+?>
+
+Output: 
+Student 1 - Marks: 95 - Grade: A+
+Student 2 - Marks: 83 - Grade: A
+Student 3 - Marks: 72 - Grade: B
+Student 4 - Marks: 67 - Grade: C
+Student 5 - Marks: 58 - Grade: D
+Student 6 - Marks: 44 - Grade: Fail
+Student 7 - Marks: 88 - Grade: A
+
+11. Develop a PHP program to show days of the week using switch cases.
+
+Uses a switch-case to match a number (1–7) with a day of the week.
+Example: 1 → Monday, 2 → Tuesday, ..., 7 → Sunday.
+
+<?php
+// Sample input number (you can change this to test)
+$day_number = 3;
+
+echo "Day number: $day_number<br>";
+echo "Day of the week: ";
+
+switch($day_number) {
+    case 1:
+        echo "Monday";
+        break;
+    case 2:
+        echo "Tuesday";
+        break;
+    case 3:
+        echo "Wednesday";
+        break;
+    case 4:
+        echo "Thursday";
+        break;
+    case 5:
+        echo "Friday";
+        break;
+    case 6:
+        echo "Saturday";
+        break;
+    case 7:
+        echo "Sunday";
+        break;
+    default:
+        echo "Invalid day number (must be between 1 and 7)";
+}
+?>
+
+Output :
+If $day_number = 3, the output is:
+
+sql
+
+Day number: 3  
+Day of the week: Wednesday
+If $day_number = 9, the output is:
+
+sql
+
+Day number: 9  
+Day of the week: Invalid day number (must be between 1 and 7)
+
+12. Write a program to check student grade based on marks:
+Conditions:
+If marks are 75% or more, the grade will be First Class.
+If marks between 60% to 74%, grade will be second class.
+If marks between 40% to 59%, grade will be third class.
+If marks are less than 40%, students will be Fail.
+
+| Marks (%) | Grade        |
+| --------- | ------------ |
+| ≥ 75%     | First Class  |
+| 60% – 74% | Second Class |
+| 40% – 59% | Third Class  |
+| < 40%     | Fail         |
+
+<?php
+// Example mark – you can change this value or take user input
+$marks = 68;
+
+echo "Marks: $marks%<br>";
+echo "Grade: ";
+
+if ($marks >= 75) {
+    echo "First Class";
+} elseif ($marks >= 60 && $marks <= 74) {
+    echo "Second Class";
+} elseif ($marks >= 40 && $marks <= 59) {
+    echo "Third Class";
+} else {
+    echo "Fail";
+}
+?>
+
+Output:
+If $marks = 68:
+
+Marks: 68%
+Grade: Second Class
+If $marks = 35:
+
+Marks: 35%
+Grade: Fail
+
+13. Consider the following snippet, comment your views.
+$sub = substr(12345, 2, 2);
+echo “sub is $sub”;
+
+OUTPUT
+sub is 34
+
+Even though 12345 is a number, PHP automatically converts it to a string for string functions like substr().
+This is a great example of PHP's dynamic typing and type juggling behavior.
+Always ensure you're aware of how numbers are interpreted as strings in such functions.
+
+14. Show a form with input fields for a user's name, email, and message. When the form is
+submitted, display a confirmation message on the same page with the user's name and
+email.
+
+Displays a form with fields: Name, Email, and Message.
+When submitted, it shows a confirmation message using the entered Name and Email.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form</title>
+</head>
+<body>
+
+<h2>Contact Us</h2>
+
+<form method="post" action="">
+    <label>Name:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Message:</label><br>
+    <textarea name="message" rows="5" cols="30" required></textarea><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST["name"]);
+    $email = htmlspecialchars($_POST["email"]);
+
+    echo "<h3>Thank you, $name!</h3>";
+    echo "<p>We have received your message. A confirmation has been sent to <strong>$email</strong>.</p>";
+}
+?>
+
+</body>
+</html>
+
+How It Works:
+method="post": Sends form data via POST.
+htmlspecialchars() is used to prevent HTML injection (security).
+After submission, the same page displays a confirmation with the user's Name and Email.
+
+15. Create a PHP program to compute the sum of the digits of a number.
+
+<?php
+// Example number
+$number = 12345;
+$sum = 0;
+
+// Copy of original number for display
+$temp = $number;
+
+// Loop through each digit
+while ($number > 0) {
+    $digit = $number % 10;    // Get the last digit
+    $sum += $digit;           // Add to sum
+    $number = (int)($number / 10);  // Remove the last digit
+}
+
+echo "Sum of digits of $temp is: $sum";
+?>
+
+OUTPUT
+Sum of digits of 12345 is: 15
+
+ Explanation:
+12345 → 1 + 2 + 3 + 4 + 5 = 15
+Uses modulo (%) and division to isolate each digit.
+
 
